@@ -1,0 +1,92 @@
+{% extends "baseAdmin.html.twig" %}
+
+
+{% block title %}
+	Liste d'utilisateurs
+
+
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-4">
+		<h1>Liste d'utilisateurs</h1>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success" role="alert">
+
+				{{ message }}
+			</div>
+		{% endfor %}
+
+
+	
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>User</th>
+					<th>Role</th>
+					<th>Date de création</th>
+					
+
+					
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+
+						<td>{{ user.id }}</td>
+						<td>{{ user.username }}</td>
+						<td>
+							{% for role in user.roles %}
+								{% if role == "ROLE_USER" %}
+									Utilisateur
+
+								{% elseif role == "ROLE_EDITOR" %}
+									Editeur
+
+								{% elseif role == "ROLE_ADMIN" %}
+									Administrateur
+
+								{% endif %}
+							{% endfor %}
+						
+
+
+					
+						</td>
+<td>{{ user.createdAt|format_datetime('short', 'none', locale='fr') }}</td>
+
+
+
+
+
+						<td>
+
+<a href="{{ path('admin.users.edit' , {id : user.id}) }}" class="btn btn-dark">
+	<i class="fas fa-edit"></i>
+</a>
+
+							<form method="POST" action="{{ path('admin.user.delete' , {id : user.id}) }}" style="display: inline-block;" onsubmit="return confirm('Confirmation de votre suppression')">
+
+
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('token_id') }}">
+<button class="btn btn-danger">
+	<i class="far fa-trash-alt"></i>
+</button>
+
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+
+	</div>
+
+{% endblock %}
+

@@ -1,0 +1,39 @@
+{% extends "baseAdmin.html.twig" %}
+
+
+{% block title %}
+	Ajouter une recettes
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="container mt-4">
+		<h1>Ajouter une recette</h1>
+
+{% if error %}
+	<div class="alert alert-danger">
+		{{ error.messageKey|trans(error.messagedata, 'security') }}
+	</div>
+{% endif %}
+		{{ form_start(form) }}
+
+	
+	
+		{{ form_widget(form) }}
+		
+		<button class="btn btn-primary">Ajouter</button>
+		{{ form_end(form) }}
+	</div>
+
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+	<script>
+		$('select').select2();
+	</script>
+{% endblock %}

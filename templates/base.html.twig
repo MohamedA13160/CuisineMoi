@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %} {% endblock %}</title>
+
+  
+<link rel="stylesheet" href="{{asset('asset/css/style2.css')}}">
+<link href="{{asset('asset/fontawesome/css/all.css')}}" rel="stylesheet">
+
+<link rel="shortcut icon" href="{{asset('asset/images/favicon.ico')}}">
+<link rel="apple-touch-icon" href="{{ asset('asset/images/apple-touch-icon.png')}}">
+<link rel="stylesheet" href="{{asset('asset/css/flaticon.css')}}">
+
+
+
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="{{asset('asset/css/bootstrap.min.css')}}">
+<!-- Caroussel CSS -->
+<link rel="stylesheet" href="{{asset('asset/css/owl.carousel.css')}}">
+
+
+
+<!-- Site CSS -->
+<link rel="stylesheet" href="{{asset('asset/css/style1.css')}}">
+
+
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="{{asset('asset/css/responsive.css')}}">
+
+<!-- color -->
+
+<link rel="stylesheet" href="{{asset('asset/css/orange.css')}}"/>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+<!-- Modernizer -->
+<script src="{{asset('asset/js/modernizer.js')}}"></script>
+
+{% block stylesheets %}{% endblock %}
+</head>
+  
+
+<body>
+    <div id="loader">
+        <div id="status"></div>
+    </div>
+    <div id="site-header">
+        <header id="header" class="header-block-top">
+            <div class="container">
+                <div class="row">
+                    <div class="main-menu">
+                        <!-- navbar -->
+                        <nav class="navbar navbar-default" id="mainNav">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <div class="logo">
+                                    <a class="navbar-brand js-scroll-trigger logo-header" href="{{path('home')}}">
+                                        <img src="{{asset('asset/images/cuisine_moi.png')}}" style="width: 200px;" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="navbar" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav navbar-right">
+
+								<li class="{% if current_menu is defined and relative_path("home")%}active{% endif %}">
+									<a href="{{path('home')}}">Accueil</a>
+								</li>
+
+								<li class="{% if current_menu_recettes is defined and relative_path("recette.index")%}active{% endif %}">
+									<a href="{{ path('recette.index') }}">Recettes</a>
+
+								</li>
+
+							{% if app.user %}
+
+								<li class="{% if current_menu_profil is defined and relative_path("profile")%}active{% endif %}">
+								<a href="{{path('profile', {id : app.user.id})}}">Profile</a>
+
+								</li>
+
+							{% endif %}
+
+							<li class="{% if current_menu_mail is defined and relative_path("contact")%}active{% endif %}">
+								<a href="{{path('contact')}}">Nous contacter</a>
+
+								</li>
+
+							{% if app.user == null %}
+								<li class="{% if form_loge is defined and relative_path("login")%} active {% endif %}">
+
+									<a href="{{ path('login')}}">Se Connecter</a>
+								</li>
+								<li class="{% if form_create is defined and relative_path("sign.up")%}active{% endif %}">
+
+									<a href="{{ path('sign.up')}}">S'inscrire</a>
+								</li>
+
+                                  
+                            {% endif %}
+
+							{% if is_granted('ROLE_USER') and is_granted('ROLE_ADMIN') == null %}
+                                      
+								<li class="">
+									<a href="{{ path('logout')}}" class="nav-link">Se deconnecter</a>
+								</li>
+
+							{% endif %}
+
+							{% if is_granted('ROLE_ADMIN') %}
+
+								<li class="">
+									<a href="{{ path('admin.index')}}" class="nav-link">Admin</a>
+								</li>
+
+                            {% endif %}
+                                     
+
+
+                                </ul>
+                            </div>
+                            <!-- end nav-collapse -->
+                        </nav>
+                        <!-- end navbar -->
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container-fluid -->
+        </header>
+        <!-- end header -->
+    </div>
+	<!-- end site-header -->
+
+<div id="banner" class="banner full-screen-mode parallax">
+	<div class="container pr">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="banner-static">
+				<div class="banner-text">
+					<div class="banner-cell">
+						<h1>Cuisine moi entre
+							<span class="typer" id="some-id" data-delay="200" data-delim=":" data-words="Amis:Familles" data-colors="red"></span>
+							<span class="cursor" data-cursordisplay="_" data-owner="some-id"></span>
+						</h1>
+            <p>Mon super site de Cuisine</p>
+
+						<div class="book-btn">
+<a class="table-btn hvr-underline-from-center {% if recettes is defined and relative_path("recette.index")%}active{% endif %}" href="{{ path('recette.index') }}">Voir les Recettes</a>
+
+
+						</div>
+						
+					</div>
+					<!-- end banner-cell -->
+				</div>
+				<!-- end banner-text -->
+			</div>
+			<!-- end banner-static -->
+		</div>
+		<!-- end col -->
+	</div>
+	<!-- end container -->
+</div>
+<!-- end banner -->
+
+
+
+</body>
+
+
+{# 
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{ path('home') }}">Navbar</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link {% if current_menu is defined and current_menu == 'recettes' %}active{% endif %}"
+            href="{{ path('recette.index') }}">Recettes</a>
+
+        </li>
+      </ul>
+      {% if app.user == null %}
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="{{ path('login')}}" class="nav-link">Se Connecter</a>
+        </li>
+        <div class="nav-item">
+          <a href="{{ path('sign.up')}}" class="nav-link">S'inscrire</a>
+        </div>
+
+      </ul>
+      {% endif %}
+
+
+      {% if is_granted('ROLE_USER') and is_granted('ROLE_ADMIN') == null %}
+
+      <ul class="navbar-nav">
+        <div class="nav-item">
+          <a href="{{ path('logout')}}" class="nav-link">Se deconnecter</a>
+        </div>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="nav-item">
+          <a href="{{ path('admin.index')}}" class="nav-link">Admin</a>
+        </div>
+        {% endif %}
+      </ul>
+
+    </div>
+ #}
+
+
+    
+
+
+
+    
+  </nav>
+  
+  {% block body %}
+    {% endblock %}
+<div id="footer" class="footer-main">
+	<div class="footer-news pad-top-100 pad-bottom-70 parallax">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+						<h2 class="ft-title color-white text-center">
+							Newsletter
+						</h2>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+					</div>
+					<form>
+						<input type="email" placeholder="Enter your e-mail id">
+						<a href="#" class="orange-btn">
+							<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+						</a>
+					</form>
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end footer-news -->
+	<div class="footer-box pad-top-70">
+<div class="container">
+
+			<div class="row">
+				<div class="footer-in-main">
+					<div class="footer-logo">
+						<div class="text-center">
+							<img src="{{asset('asset/images/cuisine_moi.png')}}" width="200px" alt=""/>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+						<div class="footer-box-a">
+							<h3>A Propos</h3>
+							<p>Aenean commodo ligula eget dolor aenean massa. Cum sociis nat penatibu set magnis dis parturient montes.</p>
+							<ul class="socials-box footer-socials pull-left">
+								<li>
+									<a href="#">
+										<div class="social-circle-border">
+											<i class="fa  fa-facebook"></i>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="social-circle-border">
+											<i class="fa fa-twitter"></i>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="social-circle-border">
+											<i class="fa fa-google-plus"></i>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="social-circle-border">
+											<i class="fa fa-pinterest"></i>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="social-circle-border">
+											<i class="fa fa-linkedin"></i>
+										</div>
+									</a>
+								</li>
+							</ul>
+
+						</div>
+						<!-- end footer-box-a -->
+					</div>
+					<!-- end col -->
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+						<div class="footer-box-b">
+							<h3>Nouveautés</h3>
+							<ul>
+								<li><a href="#">Sandwich italien</a></li>
+								<li><a href="#">Double dose de porc belly</a></li>
+								<li><a href="#">Poulet roti</a></li>
+								<li><a href="#">Triple poulet rafiner</a></li>
+							</ul>
+						</div>
+						<!-- end footer-box-b -->
+					</div>
+					<!-- end col -->
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+						<div class="footer-box-c">
+							<h3>Contact Us</h3>
+							<p>
+								<i class="fa fa-map-signs" aria-hidden="true"></i>
+								<span>6 E Esplanade, ST Avenue de la cuisine, Marseille</span>
+							</p>
+							<p>
+								<i class="fa fa-mobile" aria-hidden="true"></i>
+								<span>
+									0607080910
+								</span>
+							</p>
+							<p>
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<span>
+									<a href="#">support@cuisinemoi.com</a>
+								</span>
+							</p>
+						</div>
+						<!-- end footer-box-c -->
+					</div>
+					<!-- end col -->
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+						<div class="footer-box-d">
+							<h3>Horaires</h3>
+
+							<ul>
+								<li>
+									<p>Lundi - Mercredi
+									</p>
+									<span>
+										11:00 AM - 9:00 PM</span>
+								</li>
+								<li>
+									<p>Jeudi - Samedi
+									</p>
+									<span>
+										11:00 AM - 5:00 PM</span>
+								</li>
+							</ul>
+						</div>
+						<!-- end footer-box-d -->
+					</div>
+					<!-- end col -->
+				</div>
+				<!-- end footer-in-main -->
+			</div>
+			<!-- end row -->
+		</div>
+		<!-- end container -->
+		<div id="copyright" class="copyright-main">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<h6 class="copy-title">
+							Copyright &copy; 2020 CuisineMoi
+							<a href="#" target="_blank"></a>
+						</h6>
+					</div>
+				</div>
+				<!-- end row -->
+			</div>
+			<!-- end container -->
+		</div>
+		<!-- end copyright-main -->
+	</div>
+	<!-- end footer-box -->
+</div>
+<!-- end footer-main -->
+
+
+
+<script src="{{asset('asset/js/all.js')}}"></script>
+
+<script src="{{asset('asset/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('asset/js/custom.js')}}"></script>
+{% block javascripts %}
+
+
+{% endblock %}</body></html>
+

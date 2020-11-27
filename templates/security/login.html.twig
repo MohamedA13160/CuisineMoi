@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Se connecter' %}
+
+
+{% block body %}
+	<div class="special-menu pad-top-100 parallax">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+						<h2 class="block-title color-white text-center">
+							Se Connecter
+						</h2>
+
+					</div>
+					<div class="grid align__item">
+
+
+						<div class="register">
+
+							<img src="asset/images/cuisine_moi.png" style="width:250px;" alt="">
+
+
+							<form action="{{ path('login') }}" method="post">
+								{% if error %}
+									<div class="alert alert-danger">
+										{{ error.messageKey|trans(error.messagedata, 'security') }}
+									</div>
+								{% endif %}
+								{% for message in app.flashes('success') %}
+									<div class="alert alert-success" role="alert">
+
+										{{ message }}
+									</div>
+								{% endfor %}
+
+								<div class="form__field">
+
+									<label for="username">Nom d'utilisateur</label>
+									<input type="text" name="_username" id="username" class="form-control" value="{{last_username}}">
+								</div>
+
+								<div class="form__field">
+
+									<label for="password">Mot de passe</label>
+									<input type="password" name="_password" id="password" class="form-control">
+								</div>
+								
+
+								<div><small>Pas encore inscrit ?
+									<a class="text-muted" href="{{ path('sign.up') }}">Cliquez ici</a>
+									</small>
+								</div>
+
+
+								
+
+
+
+								<div class="form__field" style="margin-top:20px;">
+									<button type="submit" class="btn" style="height:50px;">Se connecter</button>
+
+								</div>
+
+							</form>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+

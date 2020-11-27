@@ -1,0 +1,27 @@
+{% extends "baseAdmin.html.twig" %}
+
+
+{% block title %}
+	Ajouter une recettes
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="container mt-4">
+		<h1>Ajouter une recette</h1>
+
+{% if error %}
+	<div class="alert alert-danger">
+		{{ error.messageKey|trans(error.messagedata, 'security') }}
+	</div>
+{% endif %}
+		{{ form_start(form) }}
+
+
+		{{ form_rest(form) }}
+		<button class="btn btn-primary">Ajouter</button>
+		{{ form_end(form) }}
+	</div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	S'inscrire
+{% endblock %}
+
+{% block body %}
+
+	
+<div class="special-menu pad-top-100 parallax">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+					<h2 class="block-title color-white text-center">
+						S'inscrire
+					</h2>
+
+				</div>
+
+
+					<div class="grid align__item">
+
+
+						<div class="register">
+
+							<img src="asset/images/cuisine_moi.png" style="width:250px;" alt="">
+
+
+							
+
+{% if error %}
+	<div class="alert alert-danger">
+		{{ error.messageKey|trans(error.messagedata, 'security') }}
+	</div>
+{% endif %}
+
+					{{ form_start(forms_user) }}
+
+
+	
+<div class="form__field">
+
+				{{form_widget(forms_user)}}
+
+</div>
+
+								<div class="form__field">
+									<button type="submit" class="btn" style="height:50px;">S'inscrire</button>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	
+{{ form_end(forms_user) }}
+
+
+
+{% endblock %}
+

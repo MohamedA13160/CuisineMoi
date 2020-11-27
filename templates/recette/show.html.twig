@@ -1,0 +1,93 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{{ recette.title }}
+{% endblock %}
+
+{% block body %}
+
+
+
+<div class="container">
+	<div class="row">
+		
+		<h1 class="h1">{{ recette.title }}</h1>
+		<div class="mb-1 text-muted my-4 text-right mr-5 ">{{ recette.createdAt | format_datetime() }}</div>
+
+		<blockquote>{{ recette.description }}</blockquote>
+
+		<div class="col-lg-6 col-md-3 col-sm-6 col-xs-12 text-left">
+
+
+
+			<ul class="list panel">
+				<h4 class="ingredients">Ingredients:</h4>
+				<li>{{ recette.preparation | nl2br }}</li>
+
+			</ul>
+			<ol class="list panel">
+				<h4 class="instructions">Instructions:</h4>
+				<li> Recette pour {{ recette.personne }} personnes</li>
+				
+			</ol>
+		</div>
+
+		<div class="col-lg-6 col-md-3 col-sm-6 col-xs-12 text-right">
+
+
+			<a href="https://40.media.tumblr.com/tumblr_ltfsxtKOJr1qk8hgko1_1280.jpg" target="blank">
+				<div id="view-larger" class="view-larger">View Large</div>
+<img src="{{ vich_uploader_asset(recette, 'imageFile') }}" alt="{{ recette.imageName }}" width="550" class="burger-image"/>
+
+			</a>
+
+		
+				
+			</div>
+
+{% for comment in comments %}
+
+	
+	<div>{{comment.content}}
+	</div>
+<div class="text-dark font-bold">{{comment.user.username}}</div>
+
+		
+
+
+
+	
+		
+		{% endfor %}
+
+{% if app.user %}
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+
+<button class="btn">{{ button_label|default('Envoyer') }}</button>
+{{ form_end(form) }}
+
+{% endif %}
+
+
+
+
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

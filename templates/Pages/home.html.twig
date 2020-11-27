@@ -1,0 +1,102 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %}Site Cuisine {% endblock %}
+
+{% block body %}
+<div id="about" class="about-main pad-top-100 pad-bottom-100">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+					<h2 class="block-title">
+						A propos de nous
+					</h2>
+					<h3>Ceci est un site de recette.</h3>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia, nostrud exercitation ullamco.
+					</p>
+
+					<p>
+						Aenean commodo ligula eget dolor aenean massa. Cum sociis nat penatibu set magnis dis parturient montes, nascetur ridiculus mus. quam felisorat, ultricies nec, Aenean commodo ligula eget dolor penatibu set magnis is parturient montes, nascetur ridiculus mus. quam felisorat, ultricies nec, pellentesque eu, pretium quis, sem. quat massa quis enim. Donec vitae sapien ut libero venenatis fauci Nullam quis ante. Etiam sit amet rci eget eros.
+					</p>
+
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia, nostrud exercitation ullamco.
+					</p>
+				</div>
+			</div>
+			<!-- end col -->
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+					<div class="about-images">
+						<img class="about-main" src="asset/images/about-main.jpg" alt="About Main Image">
+						<img class="about-inset" src="asset/images/about-inset.jpg" alt="About Inset Image">
+					</div>
+				</div>
+			</div>
+			<!-- end col -->
+		</div>
+		<!-- end row -->
+	</div>
+	<!-- end container -->
+</div>
+
+
+
+
+
+<div class="special-menu pad-top-100 parallax">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+					<h2 class="block-title color-white text-center">
+						Nos dernieres Recettes
+					</h2>
+				</div>
+				
+					
+				
+				<div class="special-box">
+				
+					<div id="owl-demo">
+					{% for recette in recettes %}
+
+
+						<div class="item item-type-zoom">
+							<a href="#" class="item-hover">
+								<div class="item-info">
+									<div class="headline">
+										{{recette.title}}
+										<div class="line"></div>
+										<div class="dit-line">{{recette.description}}</div>
+<div class="dit-line">{{recette.createdAt | format_datetime()}}</div>
+
+
+									</div>
+								</div>
+							</a>
+							<div class="item-img">
+						<img src="{{ vich_uploader_asset(recette, 'imageFile') }}"  alt="{{ recette.imageName }}">
+
+							</div>
+						</div>
+					{% endfor %}
+					</div>
+				</div>
+				
+
+				<!-- end special-box -->
+			</div>
+			<!-- end col -->
+		</div>
+		<!-- end row -->
+	</div>
+	<!-- end container -->
+</div>
+<!-- end special-menu -->
+
+
+
+{% endblock %}

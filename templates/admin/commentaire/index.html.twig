@@ -1,0 +1,87 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Commentaire index{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4">
+
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success" role="alert">
+
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>
+					ID
+				</th>
+				<th>
+					Titre
+				</th>
+                <th>Utilisateur</th>
+
+                <th>Recette</th>
+
+				<th>date</th>
+
+
+			</tr>
+		</thead>
+		<tbody>
+
+{% for commentaire in commentaires %}
+	<tr>
+		<td>{{ commentaire.id }}</td>
+		<td>{{ commentaire.content }}</td>
+		<td>{{ commentaire.user.username }}</td>
+		{% if commentaire.recette == null %}
+<td>Aucune recette</td>
+
+		{% else %}
+		<td>{{ commentaire.recette.title }}</td>
+		<td>{{ user.createdAt|format_datetime('short', 'none', locale='fr') }}</td>
+
+
+			
+
+		{% endif %}
+		
+
+
+
+	
+
+<td class="text-right">
+
+	<form method="POST" action="{{ path('admin_commentaire_delete' , {id : commentaire.id}) }}" style="display: inline-block;" onsubmit="return confirm('Confirmation de votre suppression')">
+
+
+		<input type="hidden" name="_method" value="DELETE">
+		<input type="hidden" name="_token" value="{{ csrf_token('token_id') }}">
+<button class="btn btn-danger">
+<i class="far fa-trash-alt"></i>
+
+
+
+</button>
+
+	</form>
+</td>
+	</tr>
+
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+</div>
+</div>
+
+
+
+{% endblock %}

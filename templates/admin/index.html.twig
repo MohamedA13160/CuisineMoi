@@ -1,0 +1,78 @@
+{% extends "baseAdmin.html.twig" %}
+
+{% block title %}
+	Tableau de bord
+{% endblock %}
+
+
+{% block body %}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success" role="alert">
+
+			{{ message }}
+		{% endfor %}
+		<div class="container">
+			<h1>Tableau de bord</h1>
+			<p>Ici tu pourras tout gérer
+			</p>
+
+		
+			<div class="decoller">
+
+				<div class="metroblock buysblock left ">
+					<span class="icon fontawesome-briefcase left"></span>
+
+
+					<h1>
+						{{ users }}
+					</h1>
+
+					<div class="clear"></div>
+					<h2>Utilisateurs</h2>
+
+				</div>
+				<div class="metroblock commentsblock left ">
+					<span class="icon fontawesome-comments left"></span>
+
+					<h1>
+						{{ recettes }}
+					</h1>
+
+					<div class="clear"></div>
+					<h2>Recettes</h2>
+
+				</div>
+				<div class="metroblock catblock left ">
+					<span class="icon fontawesome-comments left"></span>
+
+					<h1>
+						{{ categories }}
+					</h1>
+
+					<div class="clear"></div>
+					<h2>Catégories</h2>
+
+				</div>
+				<div class="metroblock catchblock left ">
+					<span class="icon fontawesome-comments left"></span>
+
+					<h1>
+						{{ commentaires }}
+					</h1>
+
+					<div class="clear"></div>
+					<h2>Commentaires
+					</h2>
+
+				</div>
+
+
+			</div>
+
+		</div>
+
+
+
+
+	{% endblock %}
+

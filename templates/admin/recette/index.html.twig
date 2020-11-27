@@ -1,0 +1,85 @@
+{% extends "baseAdmin.html.twig" %}
+
+
+{% block title %}
+	Gérer les recettes
+{% endblock %}
+
+{% block body %}
+		<div class="container mt-4">
+            <h1>Gérer les recettes</h1>
+
+{% for message in app.flashes('success') %}
+<div class="alert alert-success" role="alert">
+
+		{{ message }}
+	</div>
+{% endfor %}
+
+
+    
+
+
+<a href="{{path('admin.recette.create')}}" class="btn btn-dark">Ajouter</a>
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Titre
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Autheur
+                    </th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+            {% for recette in recettes %}
+                <tr>
+                    <td>{{ recette.id }}</td>
+                    <td>{{ recette.title }}</td>
+                    {# <td>{{ recette.category.titre }}</td>
+                    <td>{{ recette.autheur.username }}</td> #}
+
+
+                   
+
+
+                    <td class="text-right">
+<a href="{{ path('admin.recette.edit' , { id: recette.id } ) }}" class="btn btn-dark">
+	<i class="fas fa-edit"></i>
+</a>
+
+                        <form method="POST" action="{{ path('admin.recette.delete' , {id : recette.id}) }}" style="display: inline-block;" onsubmit="return confirm('Confirmation de votre suppression')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('token_id') }}">
+<button class="btn btn-danger">
+	<i class="far fa-trash-alt"></i>
+</button>
+
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        
+    </div>
+
+    
+
+
+	{% endblock %}
+
+
+

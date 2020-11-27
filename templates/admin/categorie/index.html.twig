@@ -1,0 +1,70 @@
+{% extends "baseAdmin.html.twig" %}
+
+
+{% block title %}
+	Gérer les recettes
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-4">
+		<h1>Gérer les
+		</h1>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success" role="alert">
+
+				{{ message }}
+			</div>
+		{% endfor %}
+
+
+		<a href="{{path('admin.categorie.create')}}" class="btn btn-dark">Ajouter</a>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>
+						ID
+					</th>
+					<th>
+						Titre
+					</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				{% for categorie in categories %}
+					<tr>
+						<td>{{ categorie.id }}</td>
+
+						<td>{{ categorie.titre }}</td>
+
+
+						<td class="text-right">
+<a href="{{ path('admin.categorie.edit' , { id: categorie.id } ) }}" class="btn btn-dark">
+	<i class="fas fa-edit"></i>
+</a>
+
+
+							<form method="POST" action="{{ path('admin.categorie.delete' , {id : categorie.id}) }}" style="display: inline-block;" onsubmit="return confirm('Confirmation de votre suppression')">
+
+
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('token_id') }}">
+<button class="btn btn-danger">
+	<i class="far fa-trash-alt"></i>
+</button>
+
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+
+	</div>
+
+
+{% endblock %}
+

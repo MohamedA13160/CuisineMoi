@@ -1,0 +1,397 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Plat Gourmand
+{% endblock %}
+
+{% block body %}
+
+
+
+
+
+
+		
+			
+<div id="menu" class="menu-main pad-top-100 pad-bottom-100">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+					<h2 class="block-title text-center">
+						Nos Recettes
+							{% if app.user %}
+							<a href="{{path('recette.create')}}"><i class="fas fa-plus"></i></a>
+							{% endif %}
+					</h2>
+
+				</div>
+				<div class="tab-menu">
+					<div class="slider slider-nav">
+						<div class="tab-title-menu">
+							<h2>Toute les recettes</h2>
+							<p>
+								<i class="flaticon-recipe"></i>
+							</p>
+						</div>
+
+						<div class="tab-title-menu">
+							<h2>Entrées</h2>
+							<p>
+								<i class="flaticon-canape"></i>
+							</p>
+						</div>
+						<div class="tab-title-menu">
+							<h2>Plats</h2>
+							<p>
+								<i class="flaticon-dinner"></i>
+							</p>
+						</div>
+						<div class="tab-title-menu">
+							<h2>Desserts</h2>
+							<p>
+								<i class="flaticon-desert"></i>
+							</p>
+						</div>
+						<div class="tab-title-menu">
+							<h2>Boissons</h2>
+							<p>
+								<i class="flaticon-coffee"></i>
+							</p>
+						</div>
+					</div>
+					<div class="slider slider-single">
+						<div>
+							{% set i = 0 %}
+							{% set like = 0 %}
+							{{ form_start(form)}}
+							<div class="search">
+ 
+								{{form_row(form.nameRecette , {"attr" : {"class" : "search-box"} } ) }}
+
+								<span class="search-button">
+								
+									<span class="search-icon"></span>
+									<button class="ope" id="button"></button>
+								</span>
+  
+ 								 {{form_row(form.options)}}
+							
+								{{ form_end(form)}}
+							</div>
+						
+					
+
+						
+						{% for item in recettes %}
+							
+						
+							<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-card" id="cl">
+								<div class="card">
+									<figure>
+										<img src="{{ vich_uploader_asset(item, 'imageFile') }}" alt="{{ item.imageName }}" width="250px" class="img-responsive"/>
+									</figure>
+									
+									<div class="card__container">
+										<i class="far fa-heart fa-lg"></i>
+										<h2 class="card__title">{{ item.title }}</h2>
+										<p class="mb-2 text-muted">{{ item.createdAt | format_datetime() }}</p>
+
+
+										<p class="card__text">{{ item.description }}</p>
+										
+										
+				
+										<div class="stars">
+											<div class="rating" id="like_{{i}}">
+												<!-- FIFTH HEART -->
+												<span class="stars__text"></span>
+												<input type="radio" id="heart_5_{{i}}" name="like{{i}}" value="5" />
+												<label for="heart_5_{{i}}" title="Five">&#10084;</label>
+												<!-- FOURTH HEART -->
+												<input type="radio" id="heart_4_{{i}}" name="like{{i}}" value="4" />
+												<label for="heart_4_{{i}}" title="Four">&#10084;</label>
+												<!-- THIRD HEART -->
+												<input type="radio" id="heart_3_{{i}}" name="like{{i}}" value="3" />
+												<label for="heart_3_{{i}}" title="Three">&#10084;</label>
+												<!-- SECOND HEART -->
+												<input type="radio" id="heart_2_{{i}}" name="like{{i}}" value="2" />
+												<label for="heart_2_{{i}}" title="Two">&#10084;</label>
+												<!-- FIRST HEART -->
+												<input type="radio" id="heart_1_{{i}}" name="like{{i}}" value="1" />
+												<label for="heart_1_{{i}}" title="One">&#10084;</label>
+												<span class="stars__text"></span>
+											</div>
+											{% set i = i + 1 %}
+										</div>
+										
+											<a href="{{ path('recette.show', { id: item.id , slug : item.slug }) }}"
+											class="btn btn-recette">Voir la
+											recette</a>
+										</div>	
+								</div>
+								
+								
+							</div>
+						{% endfor %}
+							<div class="navigation">
+								{{ knp_pagination_render(recettes) }}
+							</div>
+							
+							<!-- end col -->
+						</div>
+						
+
+
+						<div>
+												
+						{% for item in entrer %}
+
+
+							<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-card" id="cl">
+								<div class="card">
+									<figure>
+										<img src="{{ vich_uploader_asset(item, 'imageFile') }}" alt="{{ item.imageName }}" width="250px" class="img-responsive"/>
+									</figure>
+
+									<div class="card__container">
+										<i class="far fa-heart fa-lg"></i>
+										<h2 class="card__title">{{ item.title }}</h2>
+										<p class="mb-2 text-muted">{{ item.createdAt | format_datetime() }}</p>
+
+
+										<p class="card__text">{{ item.description }}</p>
+
+
+										<div class="stars">
+											<div
+												class="rating" id="like_{{i}}">
+												<!-- FIFTH HEART -->
+												<span class="stars__text"></span>
+												<input type="radio" id="heart_5_{{i}}" name="like{{i}}" value="5"/>
+												<label for="heart_5_{{i}}" title="Five">&#10084;</label>
+												<!-- FOURTH HEART -->
+												<input type="radio" id="heart_4_{{i}}" name="like{{i}}" value="4"/>
+												<label for="heart_4_{{i}}" title="Four">&#10084;</label>
+												<!-- THIRD HEART -->
+												<input type="radio" id="heart_3_{{i}}" name="like{{i}}" value="3"/>
+												<label for="heart_3_{{i}}" title="Three">&#10084;</label>
+												<!-- SECOND HEART -->
+												<input type="radio" id="heart_2_{{i}}" name="like{{i}}" value="2"/>
+												<label for="heart_2_{{i}}" title="Two">&#10084;</label>
+												<!-- FIRST HEART -->
+												<input type="radio" id="heart_1_{{i}}" name="like{{i}}" value="1"/>
+												<label for="heart_1_{{i}}" title="One">&#10084;</label>
+												<span class="stars__text"></span>
+											</div>
+											{% set i = i + 1 %}
+										</div>
+
+										<a href="{{ path('recette.show', { id: item.id , slug : item.slug }) }}" class="btn btn-recette">Voir la
+																						recette</a>
+									</div>
+								</div>
+
+
+							</div>
+						{% endfor %}
+						<div class="navigation">
+							{{ knp_pagination_render(entrer) }}
+						</div>
+
+							
+						</div>
+						<div>
+						{% for item in plat %}
+
+
+							<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-card" id="cl">
+								<div class="card">
+									<figure>
+										<img src="{{ vich_uploader_asset(item, 'imageFile') }}" alt="{{ item.imageName }}" width="250px" class="img-responsive"/>
+									</figure>
+
+									<div class="card__container">
+										<i class="far fa-heart fa-lg"></i>
+										<h2 class="card__title">{{ item.title }}</h2>
+										<p class="mb-2 text-muted">{{ item.createdAt | format_datetime() }}</p>
+
+
+										<p class="card__text">{{ item.description }}</p>
+
+
+										<div class="stars">
+											<div
+												class="rating" id="like_{{i}}">
+												<!-- FIFTH HEART -->
+												<span class="stars__text"></span>
+												<input type="radio" id="heart_5_{{i}}" name="like{{i}}" value="5"/>
+												<label for="heart_5_{{i}}" title="Five">&#10084;</label>
+												<!-- FOURTH HEART -->
+												<input type="radio" id="heart_4_{{i}}" name="like{{i}}" value="4"/>
+												<label for="heart_4_{{i}}" title="Four">&#10084;</label>
+												<!-- THIRD HEART -->
+												<input type="radio" id="heart_3_{{i}}" name="like{{i}}" value="3"/>
+												<label for="heart_3_{{i}}" title="Three">&#10084;</label>
+												<!-- SECOND HEART -->
+												<input type="radio" id="heart_2_{{i}}" name="like{{i}}" value="2"/>
+												<label for="heart_2_{{i}}" title="Two">&#10084;</label>
+												<!-- FIRST HEART -->
+												<input type="radio" id="heart_1_{{i}}" name="like{{i}}" value="1"/>
+												<label for="heart_1_{{i}}" title="One">&#10084;</label>
+												<span class="stars__text"></span>
+											</div>
+											{% set i = i + 1 %}
+										</div>
+
+										<a href="{{ path('recette.show', { id: item.id , slug : item.slug }) }}" class="btn btn-recette">Voir la
+																																	recette</a>
+									</div>
+								</div>
+
+
+							</div>
+						{% endfor %}
+						<div class="navigation">
+							{{ knp_pagination_render(plat) }}
+						</div>
+
+						</div>
+						<div>
+						{% for item in dessert %}
+
+
+							<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-card" id="cl">
+								<div class="card">
+									<figure>
+										<img src="{{ vich_uploader_asset(item, 'imageFile') }}" alt="{{ item.imageName }}" width="250px" class="img-responsive"/>
+									</figure>
+
+									<div class="card__container">
+										<i class="far fa-heart fa-lg"></i>
+										<h2 class="card__title">{{ item.title }}</h2>
+										<p class="mb-2 text-muted">{{ item.createdAt | format_datetime() }}</p>
+
+
+										<p class="card__text">{{ item.description }}</p>
+
+
+										<div class="stars">
+											<div
+												class="rating" id="like_{{i}}">
+												<!-- FIFTH HEART -->
+												<span class="stars__text"></span>
+												<input type="radio" id="heart_5_{{i}}" name="like{{i}}" value="5"/>
+												<label for="heart_5_{{i}}" title="Five">&#10084;</label>
+												<!-- FOURTH HEART -->
+												<input type="radio" id="heart_4_{{i}}" name="like{{i}}" value="4"/>
+												<label for="heart_4_{{i}}" title="Four">&#10084;</label>
+												<!-- THIRD HEART -->
+												<input type="radio" id="heart_3_{{i}}" name="like{{i}}" value="3"/>
+												<label for="heart_3_{{i}}" title="Three">&#10084;</label>
+												<!-- SECOND HEART -->
+												<input type="radio" id="heart_2_{{i}}" name="like{{i}}" value="2"/>
+												<label for="heart_2_{{i}}" title="Two">&#10084;</label>
+												<!-- FIRST HEART -->
+												<input type="radio" id="heart_1_{{i}}" name="like{{i}}" value="1"/>
+												<label for="heart_1_{{i}}" title="One">&#10084;</label>
+												<span class="stars__text"></span>
+											</div>
+											{% set i = i + 1 %}
+										</div>
+
+										<a href="{{ path('recette.show', { id: item.id , slug : item.slug }) }}" class="btn btn-recette">Voir la
+																																												recette</a>
+									</div>
+								</div>
+
+
+							</div>
+						{% endfor %}
+						<div class="navigation">
+							{{ knp_pagination_render(dessert) }}
+						</div>
+
+						</div>
+						<div>
+						{% for item in boisson %}
+
+
+							<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-card" id="cl">
+								<div class="card">
+									<figure>
+										<img src="{{ vich_uploader_asset(item, 'imageFile') }}" alt="{{ item.imageName }}" width="250px" class="img-responsive"/>
+									</figure>
+
+									<div class="card__container">
+										<i class="far fa-heart fa-lg"></i>
+										<h2 class="card__title">{{ item.title }}</h2>
+										<p class="mb-2 text-muted">{{ item.createdAt | format_datetime() }}</p>
+
+
+										<p class="card__text">{{ item.description }}</p>
+
+
+										<div class="stars">
+											<div
+												class="rating" id="like_{{i}}">
+												<!-- FIFTH HEART -->
+												<span class="stars__text"></span>
+												<input type="radio" id="heart_5_{{i}}" name="like{{i}}" value="5"/>
+												<label for="heart_5_{{i}}" title="Five">&#10084;</label>
+												<!-- FOURTH HEART -->
+												<input type="radio" id="heart_4_{{i}}" name="like{{i}}" value="4"/>
+												<label for="heart_4_{{i}}" title="Four">&#10084;</label>
+												<!-- THIRD HEART -->
+												<input type="radio" id="heart_3_{{i}}" name="like{{i}}" value="3"/>
+												<label for="heart_3_{{i}}" title="Three">&#10084;</label>
+												<!-- SECOND HEART -->
+												<input type="radio" id="heart_2_{{i}}" name="like{{i}}" value="2"/>
+												<label for="heart_2_{{i}}" title="Two">&#10084;</label>
+												<!-- FIRST HEART -->
+												<input type="radio" id="heart_1_{{i}}" name="like{{i}}" value="1"/>
+												<label for="heart_1_{{i}}" title="One">&#10084;</label>
+												<span class="stars__text"></span>
+											</div>
+											{% set i = i + 1 %}
+										</div>
+
+										<a href="{{ path('recette.show', { id: item.id , slug : item.slug }) }}" class="btn btn-recette">Voir la
+																																												recette</a>
+									</div>
+								</div>
+
+
+							</div>
+						{% endfor %}
+						<div class="navigation">
+							{{ knp_pagination_render(boisson) }}
+						</div>
+
+							
+						</div>
+						
+					</div>
+					
+				</div>
+				<!-- end tab-menu -->
+			</div>
+			<!-- end col -->
+		</div>
+		<!-- end row -->
+	</div>
+	<!-- end container -->
+</div>
+<!-- end menu -->
+
+
+
+
+
+
+
+				
+
+
+{% endblock %}
+

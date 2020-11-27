@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}
+	Profile
+{% endblock %}
+
+{% block body %}
+
+<div class="containere">
+	<div class="header-container">
+		<div class="header">
+
+				
+			
+			</div>
+			<!-- END header -->
+		</div>
+	
+		<div class="overlay-header"></div>
+
+
+		<div class="modif_form"> 
+			{{ form_start(forme) }}
+
+{% if user.imageName  %}
+
+	<img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="{{ user.imageName }}" width="170px" height="170px" class="body-image img"/>
+
+
+
+{% endif %}
+
+					{{ form_rest(forme) }}
+					<i class="fas fa-pen"></i>
+					
+
+
+				<div class="form__field">
+					<button type="submit" class="btn " style="height:50px;">Modifier</button>
+				</div>
+				
+
+			{{ form_end(forme) }}	
+
+		</div>
+	
+
+
+
+		</div>
+	</div>
+
+
+
+
+
+
+
+{% endblock %}
+
